@@ -26,6 +26,8 @@ steps:
     packageType: 'sdk'
     version: '3.1.x'
 
+
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -65,7 +67,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '**/*UnitTests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: PublishTestResults@2
   inputs:
