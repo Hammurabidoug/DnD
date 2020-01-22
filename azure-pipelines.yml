@@ -40,6 +40,12 @@ steps:
     configuration: '$(buildConfiguration)'
     restoreNugetPackages: true
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '**/*UnitTests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+    
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
