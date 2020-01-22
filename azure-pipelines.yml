@@ -52,21 +52,6 @@ steps:
     packageFeedSelector: 'nugetOrg'
     versionSelector: 'latestPreRelease'
 
-- task: VSTest@2
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*UnitTests*.dll
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    vsTestVersion: 'toolsInstaller'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-
-
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'XUnit'
