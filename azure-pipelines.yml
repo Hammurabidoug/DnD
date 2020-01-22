@@ -21,6 +21,11 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '3.1'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -42,6 +47,11 @@ steps:
     minorVersion: '$(Minor)'
     patchVersion: '$(Patch)'
 
+- task: VisualStudioTestPlatformInstaller@1
+  inputs:
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestPreRelease'
+
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
@@ -51,8 +61,11 @@ steps:
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
+    vsTestVersion: 'toolsInstaller'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+
 
 - task: PublishTestResults@2
   inputs:
