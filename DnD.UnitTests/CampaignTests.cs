@@ -26,5 +26,11 @@ namespace DnD.UnitTests
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void FailedTest()
+        {
+            Assert.True(false);
+        }
+
     }
 }
