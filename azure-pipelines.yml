@@ -13,6 +13,10 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  Major: '1'
+  Minor: '0'
+  Patch: '0'
+
 
 steps:
 - task: NuGetToolInstaller@1
@@ -21,10 +25,19 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+
 - task: NuGetAuthenticate@0
   inputs:
     nuGetServiceConnections: 'MyGet'
-    
+
 - task: NuGetCommand@2
   inputs:
     command: 'push'
