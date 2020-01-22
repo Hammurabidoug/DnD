@@ -5,3 +5,6 @@
 /.vs
 /DnD/.vs/DnD/v16
 /DnD/obj
+/DnD.UnitTests/bin/Debug/netcoreapp3.1
+/DnD.UnitTests/obj
+/DnD/bin/Debug
