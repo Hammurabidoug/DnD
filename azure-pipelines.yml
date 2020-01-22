@@ -21,6 +21,12 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: 3.0.x
+    performMultiLevelLookup: true
+    
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
