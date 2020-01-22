@@ -21,11 +21,16 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
+- task: NuGetAuthenticate@0
   inputs:
-    version: 3.0.x
-    performMultiLevelLookup: true
+    nuGetServiceConnections: 'MyGet'
+    
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'MyGet'
     
 - task: VSBuild@1
   inputs:
